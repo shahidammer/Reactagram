@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 
 export default class Main extends Component {
   render () {
+    console.log('Main Props: ', this.props)
     return (
       <div className='Main'>
         <h1>

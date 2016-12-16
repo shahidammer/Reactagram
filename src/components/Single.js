@@ -1,15 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router'
-
+import UserInfo from './UserDetails'
+import FormControl from './FormControl'
+import CommentList from './CommentList'
 const Single = (props) => {
-  const { post } = props
+  const { post, comments } = props
+  const commentArray = comments[post.code]
   return (
     <div className='Post'>
-      <Post_Image image={post.display_src} />
-      <Form_Control />
+      <UserInfo post={post} />
+      <PostImage imageURL={post.display_src} />
       <LikesCount likes={post.likes} />
-      <Post_Caption caption={post.caption} username={post.code} />
-      <Post_viewComment comments={2} />
+      <PostCaption caption={post.caption} username={post.code} />
+      <CommentList comments={commentArray} />
+      <FormControl onClick_Comment={props.onClick_Comment}
+        onClick_Like={props.onClick_Like} postId={post.id} postCode={post.code}/>
 
     </div>
   )
@@ -21,38 +25,38 @@ const LikesCount = (props) => {
     </div>
   )
 }
-const Post_Image = (props) => {
+const PostImage = (props) => {
   return (
-    <div className = 'Post-Image'>
-      <img src={props.image} alt='Image not Found' />
+    <div className='Post-Image'>
+      <img src={props.imageURL} alt='not Found' />
     </div>
   )
 }
-const Form_Control = (props) => {
+
+const PostCaption = (props) => {
   return (
-    <div className = 'Post-Form'>
-      <button>&#9829;</button>
-      <button>&#9869;</button>
-      <button>&#9889;</button>
-    </div>
-  )
-}
-const Post_Caption = (props) => {
-  return (
-    <div className = 'Post-Caption'>
+    <div className='Post-Caption'>
       <p>
         <span className='Post-Caption-UserName'>{props.username}:</span> {props.caption}
       </p>
     </div>
   )
 }
-const Post_viewComment = (props) => {
-  return (
-    <div className = 'Post-viewComment'>
-      <Link>
-        <p> view all {props.comments} comments </p>
-      </Link>
-    </div>
-  )
+
+Single.propTypes = {
+  post: React.PropTypes.object,
+  comments: React.PropTypes.object,
+  onClick_Comment: React.PropTypes.func,
+  onClick_Like: React.PropTypes.func
+}
+LikesCount.propTypes = {
+  likes: React.PropTypes.number
+}
+PostImage.propTypes = {
+  imageURL: React.PropTypes.string
+}
+PostCaption.propTypes = {
+  username: React.PropTypes.string,
+  caption: React.PropTypes.string
 }
 export default Single

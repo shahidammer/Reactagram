@@ -6,9 +6,9 @@ import { Router, Route, IndexRoute } from 'react-router'
 import { Provider } from 'react-redux'
 import store, { history } from './store'
 
-import App from './containers/App'
+import App from './Containers/AppContainer'
 import Post from './components/Post'
-import Single from './components/Item'
+import Single from './components/Single'
 
 const router = (
   <Provider store={store}>

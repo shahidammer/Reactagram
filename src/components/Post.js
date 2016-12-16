@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import UserInfo from './UserDetails'
 import Single from './Single'
 
 export default class Post extends Component {
@@ -9,14 +8,12 @@ export default class Post extends Component {
       <div className='App'>
         <div className='container'>
           <div className='row flex'>
-                <div className='row' id='grid'>
+                <div className='row'>
                   {
                     posts.map((post, i) => {
                       return (
-                        <div key={i}>
-                          <UserInfo post={post} index={i} />
-                          <Single post={post}/>
-
+                        <div className='InstaPost' key={i}>
+                          <Single {...this.props} post={post}/>
                         </div>
                       )
                     }
